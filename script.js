@@ -8,7 +8,7 @@ addBtn.addEventListener("click", function () {
 
   if (task === "") {
     message.innerText = "Please enter a task!";
-    message.className = "text-danger text-center fw-bold"; 
+    message.className = "text-danger text-center fw-bold";
     setTimeout(function () {
       message.innerText = "";
     }, 2000);
@@ -17,12 +17,24 @@ addBtn.addEventListener("click", function () {
 
   let li = document.createElement("li");
   li.className = "list-group-item";
-  li.innerText = task;
+  li.innerHTML = `
+  ${task}
+  <button class="btn btn-danger btn-sm float-end deleteBtn">
+    Delete
+  </button>
+`;
 
   list.appendChild(li);
+  let deleteBtn = li.querySelector(".deleteBtn");
+
+  deleteBtn.addEventListener("click", function () {
+    li.remove();
+    message.innerText = "Task deleted ";
+    
+  });
 
   message.innerText = "Task added successfully ✅";
-  message.className = "text-success text-center fw-bold"; 
+  message.className = "text-success text-center fw-bold";
 
   input.value = "";
   setTimeout(function () {
